@@ -1,3 +1,5 @@
+//se importa la clase ProductManager desde el archivo ProductManager.js.
+
 const ProductManager = require('./ProductManager');
 
 const producto = new ProductManager('./products.json');

@@ -5,8 +5,6 @@ class ProductManager {
         this.products = [];
     }
 
-
-
     addProduct(title, description, price, thumbnail, code, stock) {
         if (!title || !description || !price || !thumbnail || !code || !stock) {
             console.log(`Todos los campos son obligatorios en el producto ${title} que esta intentando ingresar`);
@@ -28,12 +26,8 @@ class ProductManager {
                 stock
             };
             this.products.push(producto);
-    
             console.log(`El producto ${producto.title} se agrego correctamente`);
-
         }
-
-        
     }
 
     getProducts() {
