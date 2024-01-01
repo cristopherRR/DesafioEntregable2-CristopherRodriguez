@@ -3,12 +3,32 @@ class ProductManager {
     constructor(path) {
         this.path = path;
         this.products = [];
+        this.loadProductsFromFile();
     }
+
+    loadProductsFromFile() {
+        const fs = require('fs');
+        if (fs.existsSync('products.json')) {
+            const products = JSON.parse(fs.readFileSync('products.json', 'utf8'));
+            this.products = products;
+            console.log('Productos cargados desde el archivo');
+        } else {
+            console.log('No se encontró el archivo de productos');
+        }
+    }
+    
+    saveProductsToFile() {
+        const fs = require('fs');
+        fs.writeFileSync('products.json', JSON.stringify(this.products));
+        console.log('Productos guardados en el archivo');
+    }
+    
 
     addProduct(title, description, price, thumbnail, code, stock) {
         if (!title || !description || !price || !thumbnail || !code || !stock) {
             console.log(`Todos los campos son obligatorios en el producto ${title} que esta intentando ingresar`);
             return;
+            this.saveProductsToFile();
         }
 
         const productoExistencia = this.products.find((producto) => producto.code === code);
@@ -53,6 +73,7 @@ class ProductManager {
         } else {
             console.log(`El producto con el id ${id} no fue encontrado`);
         }
+        this.saveProductsToFile();
     }
 
     deleteProduct(id) {
@@ -63,8 +84,11 @@ class ProductManager {
         } else {
             console.log(`El producto con el id ${id} no fue encontrado`);
         }
+        this.saveProductsToFile();
     }
 }
+
+
 
 module.exports = ProductManager;
 
