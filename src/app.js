@@ -3,11 +3,11 @@ const app = express()
 
 const ProductManager = require("./ProductManager")
 
-const productManager = new ProductManager("productos.json");
+const productManager = new ProductManager("products.json");
 
 app.get('/products', async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit) || null;
+        const limit = parseInt(req.query) || null;
         const products = await productManager.getProducts();
 
         if (limit !== null) {
@@ -22,7 +22,8 @@ app.get('/products', async (req, res) => {
 });
 
 app.get('/products/:pid', async (req, res) => {
-        const product = await productManager.getProductById(req.params.pid);
+        const product = await productManager.getProductById(
+          parseInt(req.params.pid));
         
         if (product) {
             res.json({ product });

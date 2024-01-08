@@ -49,7 +49,7 @@ class ProductManager {
         this.saveProductsToFile();
     }
 
-    getProducts() {
+     getProducts() {
         return this.products;
     }
 
