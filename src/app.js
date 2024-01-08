@@ -3,7 +3,7 @@ const app = express()
 
 const ProductManager = require("./ProductManager")
 
-const productManager = new ProductManager();
+const productManager = new ProductManager("productos.json");
 
 app.get('/products', async (req, res) => {
     try {
